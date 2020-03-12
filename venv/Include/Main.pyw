@@ -40,7 +40,8 @@ def refresh():
     app.setLabel("lblRecovered", recovered)
     app.setLabel("lblDeaths", deaths)
 
-    schedule.enter(3600, 1, refresh, (schedule,))
+    schedule.enter(3600, 1, refresh, ())
+    schedule.run()
 
 app = gui("Corona-Tracker", "400x200")
 app.addLabel("textMortalityRate", "Mortality rate: ", 0, 0)
@@ -58,6 +59,6 @@ app.setResizable(canResize=False)
 app.setFont(size = 16, family="Calibri")
 app.go()
 
-#Calls refresh every Hour
-schedule.enter(10, 1, refresh, (schedule,))
-schedule.run()
+
+
+
