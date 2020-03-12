@@ -53,6 +53,9 @@ app.addLabel("txtDeaths", "Total Deaths: ", 3, 0)
 app.addLabel("lblDeaths", "", 3,1)
 app.addButton("Refresh", refresh, 4, 0)
 refresh()
+app.setOnTop(stay=True)
+app.setResizable(canResize=False)
+app.setFont(size = 16, family="Calibri")
 app.go()
 
 #Calls refresh every Hour
