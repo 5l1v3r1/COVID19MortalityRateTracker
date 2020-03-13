@@ -1,8 +1,7 @@
 import urllib.request as urllib
 import json
 from appJar import gui
-import time
-import schedule
+import timeg
 from threading import Thread
 
 #Sry für die UI straight outta Windows 95... Wollte das einfachste UI Framework nehmen das ich finden konnte
