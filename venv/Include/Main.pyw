@@ -3,6 +3,7 @@ import json
 from appJar import gui
 import time
 import schedule
+from threading import Thread
 
 #Sry für die UI straight outta Windows 95... Wollte das einfachste UI Framework nehmen das ich finden konnte
 
@@ -41,6 +42,11 @@ def refresh():
     app.setLabel("lblRecovered", recovered)
     app.setLabel("lblDeaths", deaths)
 
+def setUpLoop():
+    while 1:
+        refresh()
+        time.sleep(5)
+
 
 app = gui("Corona-Tracker", "400x200")
 app.addLabel("textMortalityRate", "Mortality rate: ", 0, 0)
@@ -56,9 +62,8 @@ app.setOnTop(stay=True)
 app.setResizable(canResize=False)
 app.setFont(size = 16, family="Calibri")
 
-refresh()
-
-schedule.every().hour.do(refresh)
+t = Thread(target=setUpLoop, args=())
+t.start()
 
 app.go()
 
