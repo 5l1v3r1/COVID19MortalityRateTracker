@@ -45,7 +45,7 @@ def refresh():
 def setUpLoop():
     while 1:
         refresh()
-        time.sleep(5)
+        time.sleep(3600)
 
 
 app = gui("Corona-Tracker", "400x200")
