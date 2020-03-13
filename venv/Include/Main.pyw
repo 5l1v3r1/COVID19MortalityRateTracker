@@ -2,9 +2,11 @@ import urllib.request as urllib
 import json
 from appJar import gui
 import sched, time
+from threading import Thread
 
 #Sry für die UI straight outta Windows 95... Wollte das einfachste UI Framework nehmen das ich finden konnte
 schedule = sched.scheduler(time.time, time.sleep)
+
 
 def getData():
     try:
@@ -23,6 +25,7 @@ def getData():
 
     return dataJson
 
+
 def refresh():
     dataJson = getData()
 
@@ -39,9 +42,9 @@ def refresh():
     app.setLabel("lblConfirmed", confirmed)
     app.setLabel("lblRecovered", recovered)
     app.setLabel("lblDeaths", deaths)
-
     schedule.enter(3600, 1, refresh, ())
-    schedule.run()
+    schedule.run(blocking=False)
+
 
 app = gui("Corona-Tracker", "400x200")
 app.addLabel("textMortalityRate", "Mortality rate: ", 0, 0)
@@ -53,10 +56,12 @@ app.addLabel("lblRecovered", "", 2, 1)
 app.addLabel("txtDeaths", "Total Deaths: ", 3, 0)
 app.addLabel("lblDeaths", "", 3,1)
 app.addButton("Refresh", refresh, 4, 0)
-refresh()
 app.setOnTop(stay=True)
 app.setResizable(canResize=False)
 app.setFont(size = 16, family="Calibri")
+
+refresh()
+
 app.go()
 
 
